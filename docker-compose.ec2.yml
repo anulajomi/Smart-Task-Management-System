@@ -1,0 +1,20 @@
+services:
+  auth-service:
+    image: stms-auth-service:latest
+    build: !reset null
+
+  task-service:
+    image: stms-task-service:latest
+    build: !reset null
+
+  notification-service:
+    image: stms-notification-service:latest
+    build: !reset null
+
+  report-service:
+    image: stms-report-service:latest
+    build: !reset null
+
+  api-gateway:
+    image: stms-api-gateway:latest
+    build: !reset null

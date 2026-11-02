@@ -1,0 +1,60 @@
+---
+- name: Deploy STMS backend on Floci EC2
+  hosts: backend
+  become: true
+
+  vars:
+    app_dir: /home/ubuntu/stms
+    project_dir: "{{ playbook_dir }}/.."
+
+  tasks:
+    - name: Create application directory
+      ansible.builtin.file:
+        path: "{{ app_dir }}"
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+    - name: Copy Docker Compose configuration
+      ansible.builtin.copy:
+        src: "{{ project_dir }}/docker-compose.yml"
+        dest: "{{ app_dir }}/docker-compose.yml"
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+
+    - name: Copy API Gateway source
+      ansible.builtin.copy:
+        src: "{{ project_dir }}/api-gateway_1784010924579"
+        dest: "{{ app_dir }}/"
+        owner: ubuntu
+        group: ubuntu
+
+    - name: Copy Authentication Service source
+      ansible.builtin.copy:
+        src: "{{ project_dir }}/auth-service_1784011000189"
+        dest: "{{ app_dir }}/"
+        owner: ubuntu
+        group: ubuntu
+
+    - name: Copy Task Service source
+      ansible.builtin.copy:
+        src: "{{ project_dir }}/task-service"
+        dest: "{{ app_dir }}/"
+        owner: ubuntu
+        group: ubuntu
+
+    - name: Copy Notification Service source
+      ansible.builtin.copy:
+        src: "{{ project_dir }}/notification-service"
+        dest: "{{ app_dir }}/"
+        owner: ubuntu
+        group: ubuntu
+
+    - name: Copy Report Service source
+      ansible.builtin.copy:
+        src: "{{ project_dir }}/report-service"
+        dest: "{{ app_dir }}/"
+        owner: ubuntu
+        group: ubuntu

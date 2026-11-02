@@ -1,0 +1,29 @@
+---
+- name: Install Docker on Floci Ubuntu EC2
+  hosts: backend
+  become: true
+
+  tasks:
+    - name: Update Ubuntu package cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Install Docker and Docker Compose
+      ansible.builtin.apt:
+        name:
+          - docker.io
+          - docker-compose-v2
+        state: present
+
+    - name: Start Docker service
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Add ubuntu user to Docker group
+      ansible.builtin.user:
+        name: ubuntu
+        groups: docker
+        append: true

@@ -1,0 +1,29 @@
+node_modules/
+**/node_modules/
+
+.env
+.env.*
+!.env.example
+
+dist/
+build/
+coverage/
+
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+crash.log
+
+*.pem
+*.key
+*.p12
+
+.vault-token
+
+# Local backups
+*.bak
+
+# Kubernetes local secrets
+/kubernetes/secret.yaml
