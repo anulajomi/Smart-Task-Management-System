@@ -77,7 +77,9 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                sh 'docker compose build'
+                sh '''
+                    JWT_SECRET=jenkins-build-placeholder docker compose build
+        '''
             }
         }
 
